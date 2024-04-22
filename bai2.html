@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới Thiệu Các Loại Biểu Đồ</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: auto; 
+            margin: 0; 
+            padding: 0; }
+
+        h1 {
+            text-align: center;
+        }
+
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chart {
+            width: 600px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Giới Thiệu Các Loại Biểu Đồ</h1>
+
+    <h2>Scatter Plot</h2>
+    <div id="scatterPlot" style="width: 600px; height: 400px;"></div>
+
+    <h2>Line Chart</h2>
+    <div>
+        <canvas id="lineChart" width="560" height="300"></canvas>
+    </div>
+
+    <h2>Bar Chart</h2>
+    <div>
+        <canvas id="barChart" width="560" height="300"></canvas>
+    </div>
+
+    <h2>Pie Chart</h2>
+    <div>
+        <canvas id="pieChart" width="560" height="300"></canvas>
+    </div>
+
+    <h2>Donut Chart</h2>
+    <div>
+        <canvas id="donutChart"width="560" height="300"></canvas>
+    </div>
+
+    <h2>Bubble Chart</h2>
+    <div id="bubbleChart" style="width: 600px; height: 400px;"></div>
+
+    <script>
+        var scatterPlotData = [{
+            x: [1, 2, 3, 4, 5],
+            y: [10, 15, 19, 17, 20],
+            mode: 'markers',
+            type: 'scatter'
+        }];
+        Plotly.newPlot('scatterPlot', scatterPlotData);
+// 
+        var lineChartData = {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: [65, 59, 80, 81, 56]
+            }]
+        };
+        var lineChartOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        };
+        var lineCtx = document.getElementById('lineChart').getContext('2d');
+        var lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: lineChartData,
+            options: lineChartOptions
+        });
+// 
+        var barChartData = {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [{
+                label: 'Sales',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                lyborderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+                data: [42, 59, 71, 81, 16]
+            }]
+        };
+        var barChartOptions = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                       
+                        
+                    }
+                }]
+            }
+        };
+        var barCtx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        });
+
+// Pie Chart
+        var pieChartCanvas = document.getElementById('pieChart');
+        var pieChartData = {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+            datasets: [{
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: [
+                    'red',
+                    'blue',
+                    'yellow',
+                    'green',
+                    'purple'
+                ]
+            }]
+        };
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieChartData
+        });
+
+        // Donut Chart
+        var donutChartCanvas = document.getElementById('donutChart');
+        var donutChartData = {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+            datasets: [{
+                data: [12, 19, 3, 5, 2],
+                backgroundColor: [
+                    'red',
+                    'blue',
+                    'yellow',
+                    'green',
+                    'purple'
+                ]
+            }]
+        };
+        var donutChart = new Chart(donutChartCanvas, {
+            type: 'doughnut',
+            data: donutChartData
+        });
+
+        // Bubble Chart
+        var bubblePlotData = {
+            x: [1, 2, 3, 4, 5],
+            y: [10, 15, 13, 17, 20],
+            mode: 'markers',
+            marker: {
+                size: [20, 30, 40, 50, 60]
+            }
+        };
+        var bubblePlotLayout = {
+            title: 'Bubble Chart',
+            showlegend: false
+        };
+        Plotly.newPlot('bubbleChart', [bubblePlotData], bubblePlotLayout);
+    </script>
+</body>
+</html>
